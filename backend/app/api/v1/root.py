@@ -10,3 +10,6 @@ async def root():
     return {
         "message": f"Welcome to {settings.app_name}"
     }
+
+
+ 

@@ -28,6 +28,22 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int
 
     # ---------------------------------------------------------
+    # Logging
+    # ---------------------------------------------------------
+    
+    log_level: str = "INFO"
+    log_format: str = "text"
+    log_file: str = "logs/shopintel.log"
+
+    # ---------------------------------------------------------
+    # CORS
+    # ---------------------------------------------------------
+    backend_cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
+    backend_cors_credentials: bool = True
+    backend_cors_methods: str = "*"
+    backend_cors_headers: str = "*"
+
+    # ---------------------------------------------------------
     # Environment File
     # ---------------------------------------------------------
     model_config = SettingsConfigDict(
