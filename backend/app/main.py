@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.router import router as api_router
 from app.config.settings import settings
 
 
@@ -17,25 +18,8 @@ def create_app() -> FastAPI:
         openapi_url="/openapi.json",
     )
 
-    # -----------------------------
-    # Root Endpoint
-    # -----------------------------
-    @app.get("/", tags=["Root"])
-    async def root():
-        return {
-            "message": f"Welcome to {settings.app_name}"
-        }
-
-    # -----------------------------
-    # Health Endpoint
-    # -----------------------------
-    @app.get("/health", tags=["Health"])
-    async def health():
-        return {
-            "status": "healthy",
-            "version": settings.app_version,
-            "debug": settings.debug
-        }
+    # Register all API routes
+    app.include_router(api_router)
 
     return app
 

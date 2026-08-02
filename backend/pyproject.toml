@@ -1,21 +1,20 @@
 [project]
-name = "backend"
+name = "shopintel-backend"
 version = "0.1.0"
-description = "Add your description here"
+description = "ShopIntel Backend API"
 readme = "README.md"
-authors = [
-    { name = "Muhammad Ali", email = "jobsforyou.gi@gmail.com" }
-]
 requires-python = ">=3.11"
+
 dependencies = [
     "fastapi>=0.141.1",
-    "pydantic-settings>=2.14.2",
     "uvicorn>=0.52.0",
+    "pydantic-settings>=2.14.2",
 ]
 
-[project.scripts]
-backend = "backend:main"
+[dependency-groups]
+dev = [
+    "pytest>=8.4.0",
+]
 
-[build-system]
-requires = ["uv_build>=0.12.1,<0.13.0"]
-build-backend = "uv_build"
+[tool.uv]
+package = false
