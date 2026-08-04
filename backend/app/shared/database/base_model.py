@@ -6,7 +6,7 @@ from app.shared.database.mixins.uuid_mixin import UUIDMixin
 
 class BaseModel(
     UUIDMixin,
-    TimestampMixin,
+    TimestampMixin, #empty as of now
     SoftDeleteMixin,
     Base,
 ):
