@@ -81,5 +81,10 @@ class Category(BaseModel):
         back_populates="parent",
     )
 
+    products: Mapped[list["Product"]] = relationship(
+        "Product",
+        back_populates="category",
+    )
+
     def __repr__(self) -> str:
         return f"<Category(name='{self.name}')>"

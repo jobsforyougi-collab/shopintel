@@ -2,6 +2,7 @@ from sqlalchemy import Boolean, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.shared.database.base_model import BaseModel
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class Brand(BaseModel):
@@ -49,6 +50,11 @@ class Brand(BaseModel):
         default=True,
         server_default="true",
         comment="Indicates whether the brand is active",
+    )
+
+    products: Mapped[list["Product"]] = relationship(
+        "Product",
+        back_populates="brand",
     )
 
     def __repr__(self) -> str:

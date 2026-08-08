@@ -10,3 +10,4 @@ class Base(DeclarativeBase):
 from app.modules.catalog.models.marketplace import Marketplace
 from app.modules.catalog.models.brand import Brand
 from app.modules.catalog.models.category import Category
+from app.modules.catalog.models.product import Product
