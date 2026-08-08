@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.shared.database.base_model import BaseModel
 
@@ -44,6 +44,11 @@ class Marketplace(BaseModel):
         default=True,
         server_default="true",
         comment="Indicates whether the marketplace is active",
+    )
+
+    regions: Mapped[list["MarketplaceRegion"]] = relationship(
+        "MarketplaceRegion",
+        back_populates="marketplace",
     )
 
     def __repr__(self) -> str:
