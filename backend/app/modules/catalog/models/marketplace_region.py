@@ -3,6 +3,8 @@ from __future__ import annotations
 from sqlalchemy import Boolean, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from sqlalchemy import Boolean, ForeignKey, String, UniqueConstraint
+
 from app.shared.database.base_model import BaseModel
 
 
@@ -20,6 +22,14 @@ class MarketplaceRegion(BaseModel):
     """
 
     __tablename__ = "marketplace_regions"
+
+    __table_args__ = (
+        UniqueConstraint(
+            "marketplace_id",
+            "code",
+            name="uq_marketplace_regions_marketplace_code",
+        ),
+    )
 
     marketplace_id: Mapped[str] = mapped_column(
         ForeignKey("marketplaces.id"),
@@ -80,6 +90,11 @@ class MarketplaceRegion(BaseModel):
     marketplace: Mapped["Marketplace"] = relationship(
         "Marketplace",
         back_populates="regions",
+    )
+
+    marketplace_products: Mapped[list["MarketplaceProduct"]] = relationship(
+        "MarketplaceProduct",
+        back_populates="marketplace_region",
     )
 
     def __repr__(self) -> str:

@@ -51,5 +51,10 @@ class Marketplace(BaseModel):
         back_populates="marketplace",
     )
 
+    marketplace_products: Mapped[list["MarketplaceProduct"]] = relationship(
+        "MarketplaceProduct",
+        back_populates="marketplace",
+    )
+
     def __repr__(self) -> str:
         return f"<Marketplace(name='{self.name}', code='{self.code}')>"
