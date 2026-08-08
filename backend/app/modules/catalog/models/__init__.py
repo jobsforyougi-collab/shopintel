@@ -4,6 +4,7 @@ from .marketplace import Marketplace
 from .marketplace_product import MarketplaceProduct
 from .marketplace_region import MarketplaceRegion
 from .product import Product
+from .seller import Seller
 
 __all__ = [
     "Marketplace",
@@ -12,4 +13,5 @@ __all__ = [
     "Brand",
     "Category",
     "Product",
+    "Seller",
 ]
