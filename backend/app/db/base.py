@@ -15,3 +15,4 @@ from app.modules.catalog.models.brand import Brand
 from app.modules.catalog.models.category import Category
 from app.modules.catalog.models.product import Product
 from app.modules.catalog.models.seller import Seller
+from app.modules.catalog.models.current_price import CurrentPrice

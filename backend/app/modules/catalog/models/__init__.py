@@ -6,6 +6,7 @@ from .marketplace_region import MarketplaceRegion
 from .marketplace_seller import MarketplaceSeller
 from .product import Product
 from .seller import Seller
+from .current_price import CurrentPrice
 
 __all__ = [
     "Marketplace",
@@ -16,4 +17,5 @@ __all__ = [
     "Category",
     "Product",
     "Seller",
+    "CurrentPrice",
 ]
