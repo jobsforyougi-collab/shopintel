@@ -48,6 +48,15 @@ class MarketplaceProduct(BaseModel):
         comment="Marketplace containing this listing",
     )
 
+    marketplace_seller_id: Mapped[str] = mapped_column(
+    ForeignKey(
+        "marketplace_sellers.id",
+        name="fk_marketplace_products_marketplace_seller_id",
+    ),
+    nullable=False,
+    comment="Marketplace seller responsible for this listing",
+    )
+
     marketplace_region_id: Mapped[str] = mapped_column(
         ForeignKey("marketplace_regions.id"),
         nullable=False,
@@ -140,6 +149,12 @@ class MarketplaceProduct(BaseModel):
         "MarketplaceRegion",
         back_populates="marketplace_products",
     )
+
+    
+    marketplace_seller: Mapped["MarketplaceSeller"] = relationship(
+    "MarketplaceSeller",
+    back_populates="marketplace_products",
+)
 
     def __repr__(self) -> str:
         return (

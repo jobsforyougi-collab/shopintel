@@ -97,6 +97,11 @@ class MarketplaceRegion(BaseModel):
         back_populates="marketplace_region",
     )
 
+    marketplace_sellers: Mapped[list["MarketplaceSeller"]] = relationship(
+    "MarketplaceSeller",
+    back_populates="marketplace_region",
+)
+
     def __repr__(self) -> str:
         return (
             f"<MarketplaceRegion("
