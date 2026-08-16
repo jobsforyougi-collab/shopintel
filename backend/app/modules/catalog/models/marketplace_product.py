@@ -154,7 +154,18 @@ class MarketplaceProduct(BaseModel):
     marketplace_seller: Mapped["MarketplaceSeller"] = relationship(
     "MarketplaceSeller",
     back_populates="marketplace_products",
-)
+    )
+
+    current_price: Mapped["CurrentPrice | None"] = relationship(
+    "CurrentPrice",
+    back_populates="marketplace_product",
+    uselist=False,
+    )
+
+    price_history: Mapped[list["PriceHistory"]] = relationship(
+    "PriceHistory",
+    back_populates="marketplace_product",
+    )
 
     def __repr__(self) -> str:
         return (

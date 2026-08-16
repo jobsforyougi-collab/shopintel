@@ -7,6 +7,7 @@ from .marketplace_seller import MarketplaceSeller
 from .product import Product
 from .seller import Seller
 from .current_price import CurrentPrice
+from .price_history import PriceHistory
 
 __all__ = [
     "Marketplace",
@@ -18,4 +19,5 @@ __all__ = [
     "Product",
     "Seller",
     "CurrentPrice",
+    "PriceHistory",
 ]
