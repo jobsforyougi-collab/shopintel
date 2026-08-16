@@ -1,4 +1,4 @@
-from app.db.base import Base
+from app.db.base_class import Base
 from app.shared.database.mixins.soft_delete_mixin import SoftDeleteMixin
 from app.shared.database.mixins.timestamp_mixin import TimestampMixin
 from app.shared.database.mixins.uuid_mixin import UUIDMixin

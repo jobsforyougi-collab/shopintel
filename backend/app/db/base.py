@@ -1,12 +1,12 @@
-from sqlalchemy.orm import DeclarativeBase
+from app.db.base_class import Base
 
 
-class Base(DeclarativeBase):
-    """Base class for all SQLAlchemy ORM models."""
+# Import all ORM models here so Alembic can discover them.
+#
+# This file is intentionally separate from base_class.py.
+# base_class.py must contain only the DeclarativeBase definition
+# and must never import ORM models.
 
-    pass
-
-# Import all ORM models here so Alembic can discover them
 from app.modules.catalog.models.marketplace import Marketplace
 from app.modules.catalog.models.marketplace_region import MarketplaceRegion
 from app.modules.catalog.models.marketplace_product import MarketplaceProduct
@@ -17,3 +17,18 @@ from app.modules.catalog.models.product import Product
 from app.modules.catalog.models.seller import Seller
 from app.modules.catalog.models.current_price import CurrentPrice
 from app.modules.catalog.models.price_history import PriceHistory
+
+
+__all__ = [
+    "Base",
+    "Marketplace",
+    "MarketplaceRegion",
+    "MarketplaceProduct",
+    "MarketplaceSeller",
+    "Brand",
+    "Category",
+    "Product",
+    "Seller",
+    "CurrentPrice",
+    "PriceHistory",
+]

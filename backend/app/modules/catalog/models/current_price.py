@@ -45,6 +45,12 @@ class CurrentPrice(BaseModel):
         comment="Current monetary price amount",
     )
 
+    reference_amount: Mapped[Decimal | None] = mapped_column(
+    Numeric(14, 2),
+    nullable=True,
+    comment="Marketplace-provided reference or original price used for discount display",
+    )
+
     currency_code: Mapped[str] = mapped_column(
         String(3),
         nullable=False,

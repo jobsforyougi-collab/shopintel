@@ -35,6 +35,12 @@ class PriceHistory(BaseModel):
         comment="Historical monetary price amount",
     )
 
+    reference_amount: Mapped[Decimal | None] = mapped_column(
+    Numeric(14, 2),
+    nullable=True,
+    comment="Marketplace-provided reference or original price at the time of observation",
+    )
+
     currency_code: Mapped[str] = mapped_column(
         String(3),
         nullable=False,
