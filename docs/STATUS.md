@@ -22,6 +22,7 @@ _Last updated: 2026-08-26._
 | ID | Task | Owner | Branch | Notes |
 |----|------|-------|--------|-------|
 | INF-02 | `backend/.env.development.example` (keys matched to settings.py) | Huzaifah-Analyst | docs/initial-analysis | in PR #1 |
+| QA-01/02 | pytest scaffold + health/root/exception/settings tests | Huzaifah-Analyst | feat/qa-01-test-scaffold | no DB; safe/non-colliding |
 
 ## 🔵 To Do
 
