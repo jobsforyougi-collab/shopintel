@@ -12,6 +12,7 @@ Anything we discover, plan, or finish gets written here so **both sides (and the
 | [03-FRONTEND.md](03-FRONTEND.md) | Frontend state (none yet) + proposed structure |
 | [04-TESTING.md](04-TESTING.md) | Testing state (none yet) + proposed test strategy |
 | [05-PLAN.md](05-PLAN.md) | Task breakdown, agent/owner assignment, collaboration protocol |
+| [DECISIONS.md](DECISIONS.md) | **Agreed decisions** — ownership split, DB, API conventions, tooling |
 | [STATUS.md](STATUS.md) | **Live task board** — update this whenever a task starts/finishes |
 | [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) | Questions we need the other team to answer before deep work |
 

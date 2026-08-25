@@ -1,49 +1,43 @@
 # OPEN QUESTIONS — for the other team (Qasim's side)
 
-These block deep work. Please answer inline (edit this file or reply in chat), so both
-AIs build on the same assumptions instead of guessing.
+Most items are now resolved (see [DECISIONS.md](DECISIONS.md)). Q7 is the remaining blocker.
 
 ---
 
 ### Q1 — Collaborator access — ✅ RESOLVED
-Invite accepted. New dev **`Huzaifah-Analyst`** now has push access (verified: `push: true`).
-No action needed.
+`Huzaifah-Analyst` has push access (verified `push: true`).
 
-### Q2 — `.env.development` values (blocking local run)
-`settings.py` requires `app_name, app_version, debug, database_url, secret_key,
-algorithm, access_token_expire_minutes` and reads `.env.development`, which is gitignored.
-The app **won't boot** without it.
+### Q2 — `.env.development` values — ✅ RESOLVED (being handled)
+Huzaifah is adding `backend/.env.development.example` with safe placeholders, keys matched
+**exactly** to `app/config/settings.py` (no invented keys).
 
-**We need:** a filled `.env.development.example` (real keys, safe/placeholder values —
-no production secrets) committed to the repo.
+### Q3 — Ownership + task split — ✅ RESOLVED
+See [DECISIONS.md](DECISIONS.md). Qasim: DB/auth/catalog/pricing/core. Huzaifah:
+frontend/notifications/alerts/env-example.
 
-### Q3 — Ownership of foundation + task split
-To avoid both sides scaffolding the DB/auth differently:
-- Who owns the **database layer + auth** (BE-01…BE-04)?
-- What is Qasim currently working on **right now** (so we don't collide)?
-- Which modules should **we** take end-to-end? (Our proposal: frontend + `notifications`/`alerts`.)
+### Q4 — Database choice — ✅ RESOLVED
+PostgreSQL + SQLAlchemy + Alembic. Driver `postgresql+psycopg`.
 
-### Q4 — Database choice
-Which DB + ORM? (e.g. **PostgreSQL + SQLAlchemy + Alembic**? SQLModel? Tortoise?)
-`database_url` exists but no driver/ORM is in `pyproject.toml` yet.
+### Q5 — Frontend framework — ✅ RESOLVED (styling pending)
+Next.js web; Flutter later. **Styling not yet agreed** — proposal: Tailwind CSS. Please
+confirm before we add a UI dependency stack.
 
-### Q5 — Frontend framework
-`.gitignore` hints **Next.js** (web) + **Flutter** (mobile). Confirm:
-- Web framework + styling (Next.js + Tailwind? something else?)
-- Is mobile (Flutter) in scope now or later?
-
-### Q6 — Conventions
-- Response envelope: the error handler returns `{"success": false, "message": ...}`.
-  Is there a matching **success** envelope shape we should follow?
-- Linter/formatter preference (ruff? black?) so both sides format the same way.
-- Any existing design doc / Sprint plan / Jira/Trello board we should read?
+### Q6 — Conventions — ✅ RESOLVED
+No success envelope (return schemas directly); keep the existing error convention. Ruff for
+Python; ESLint/Prettier for TS.
 
 ---
 
-**Answers:**
-- Q1: ✅ Resolved — Huzaifah-Analyst has push access.
-- Q2: …
-- Q3: …
-- Q4: …
-- Q5: …
-- Q6: …
+### Q7 — ⚠ BLOCKER: existing pricing/catalog work is not in the repo
+Qasim's assistant says catalog/pricing models + pricing service/repository + Alembic
+migrations already exist and should be treated as the baseline. **But the remote has none of
+it** — only `main` (Sprint-1 skeleton with empty `app/modules/*`) and our docs branch.
+
+**We need one of:**
+- Qasim **pushes** the existing SQLAlchemy models / Alembic / pricing work to a branch + opens a PR, **or**
+- points us to the exact branch/commit where it lives.
+
+Reason: alerts/notifications (Huzaifah's scope) depend on the product/price schema. We can't
+build against models we can't see, and we must not re-create them (duplication risk).
+
+**Answer:** …
