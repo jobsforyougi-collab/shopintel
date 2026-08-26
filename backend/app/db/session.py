@@ -1,6 +1,12 @@
+from collections.abc import Generator
+
 from sqlalchemy.orm import sessionmaker
 
 from app.db.engine import engine
+
+# Import all ORM models so SQLAlchemy registers every mapper
+# before database queries are executed.
+import app.db.base  # noqa: F401
 
 
 SessionLocal = sessionmaker(
@@ -9,8 +15,6 @@ SessionLocal = sessionmaker(
     autocommit=False,
     expire_on_commit=False,
 )
-
-from collections.abc import Generator
 
 
 def get_db() -> Generator:

@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from decimal import Decimal
 from typing import Any
+from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -20,6 +21,7 @@ class PriceRepository:
     - Create current price records.
     - Update current price records.
     - Create immutable price history records.
+    - Retrieve historical price observations.
 
     Business rules belong in the service layer.
     """
@@ -33,7 +35,7 @@ class PriceRepository:
 
     def get_current_price(
         self,
-        marketplace_product_id: str,
+        marketplace_product_id: UUID,
     ) -> CurrentPrice | None:
         """
         Return the current price for a marketplace product.
@@ -48,7 +50,7 @@ class PriceRepository:
 
     def create_current_price(
         self,
-        marketplace_product_id: str,
+        marketplace_product_id: UUID,
         amount: Decimal,
         reference_amount: Decimal | None,
         currency_code: str,
@@ -104,12 +106,12 @@ class PriceRepository:
         return current_price
 
     # ---------------------------------------------------------
-    # Price History
+    # Price History - Write
     # ---------------------------------------------------------
 
     def create_price_history(
         self,
-        marketplace_product_id: str,
+        marketplace_product_id: UUID,
         amount: Decimal,
         reference_amount: Decimal | None,
         currency_code: str,
@@ -137,6 +139,50 @@ class PriceRepository:
         self.db.flush()
 
         return price_history
+
+    # ---------------------------------------------------------
+    # Price History - Read
+    # ---------------------------------------------------------
+
+    def get_price_history(
+        self,
+        marketplace_product_id: UUID,
+        start_at: datetime | None = None,
+        end_at: datetime | None = None,
+    ) -> list[PriceHistory]:
+        """
+        Retrieve historical price observations for a marketplace product.
+
+        Results are ordered chronologically by captured_at.
+
+        Optional:
+        - start_at: inclusive lower time boundary
+        - end_at: inclusive upper time boundary
+
+        Soft-deleted records are excluded.
+        """
+
+        statement = (
+            select(PriceHistory)
+            .where(
+                PriceHistory.marketplace_product_id
+                == marketplace_product_id,
+                PriceHistory.deleted_at.is_(None),
+            )
+            .order_by(PriceHistory.captured_at.asc())
+        )
+
+        if start_at is not None:
+            statement = statement.where(
+                PriceHistory.captured_at >= start_at
+            )
+
+        if end_at is not None:
+            statement = statement.where(
+                PriceHistory.captured_at <= end_at
+            )
+
+        return list(self.db.scalars(statement).all())
 
     # ---------------------------------------------------------
     # Transaction
